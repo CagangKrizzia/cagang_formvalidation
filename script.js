@@ -1,4 +1,3 @@
-
 let lastNameInput = document.getElementById("last-name-input");
 let lastNameError = document.getElementById("last-name-error");
 let emptyLastNameError = document.getElementById("empty-last-name");
@@ -32,15 +31,15 @@ let submitButton = document.getElementById("submit-button");
 let validClasses = document.getElementsByClassName("valid");
 let invalidClasses = document.getElementsByClassName("error");
 
-const passwordVerify = (password) => {
-  const regex =
-    /^(?=.+[a-z])(?=.+[A-Z])(?=.+[0-9])(?=.+[\$\%\^\&\!@\#\*\(\)\+\=`~\?\>\<])/;
-  return regex.test(password) && password.length >= 8;
-};
 
 const textVerify = (text) => {
   const regex = /^[a-zA-Z]{2,}$/;
   return regex.test(text);
+};
+
+const emailVerify = (input) => {
+  const regex = /^[a-z0-9_]+@[a-z]{3,}\.[a-z\.]{3,}$/;
+  return regex.test(input);
 };
 
 const phoneVerify = (number) => {
@@ -48,9 +47,10 @@ const phoneVerify = (number) => {
   return regex.test(number);
 };
 
-const emailVerify = (input) => {
-  const regex = /^[a-z0-9_]+@[a-z]{3,}\.[a-z\.]{3,}$/;
-  return regex.test(input);
+const passwordVerify = (password) => {
+  const regex =
+    /^(?=.+[a-z])(?=.+[A-Z])(?=.+[0-9])(?=.+[\$\%\^\&\!@\#\*\(\)\+\=`~\?\>\<])/;
+  return regex.test(password) && password.length >= 8;
 };
 
 const emptyUpdate = (
@@ -106,16 +106,16 @@ firstNameInput.addEventListener("input", () => {
   }
 });
 
-middleNameInput.addEventListener("input", () => {
+/Middle Name
+midleNameInput.addEventListener("input", () => {
   if (textVerify(middleNameInput.value)) {
     middleNameError.classList.add("hide");
     validInput(middleNameInput);
   } else {
-    errorUpdate(middleNameInput, lastNameError);
+    errorUpdate(middleNameInput, middleNameError);
     emptyUpdate(middleNameInput, emptymiddleNameError, middleNameError);
   }
 });
-
 
 emailInput.addEventListener("input", () => {
   if (emailVerify(emailInput.value)) {
